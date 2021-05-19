@@ -146,8 +146,7 @@
                                 Basket
                                 <span class="price" style="color: white"
                                     ><i class="fa fa-shopping-basket"></i>
-                                    <b>4</b></span
-                                >
+                                </span>
                             </h4>
 
                             @if(session('basket')) @php $total = 0 @endphp
@@ -316,7 +315,7 @@
                                         type="text"
                                         id="total"
                                         name="total"
-                                        value="{{ $total }}"
+                                        value="{{ $total ?? '' }}"
                                     />
                                 </div>
 
