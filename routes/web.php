@@ -20,29 +20,49 @@ Route::get('/', function () {
     return view('main');
 });
 
-Route::get('/menu', function () {
-    return view('product.menu');
-});
+// Route::get('/menu', function () {
+//     return view('product.menu');
+// });
+// Route::get('/products', function () {
+//     return view('product.index');
+// });
+// Route::get('/create-product', function () {
+//     return view('product.create');
+// });
+// Route::get('/edit-product', function () {
+//     return view('product.edit');
+// });
+// Route::get('/basket', function () {
+//     return view('basket.index');
+// });
+// Route::get('/checkout', function () {
+//     return view('checkout.index');
+// });
 
-Route::get('/product-list', function () {
-    return view('product.index');
-});
+//Logged in
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
+// Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::get('/create-product', function () {
-    return view('product.create');
-});
+// Admin product list
+Route::get('products','App\Http\Controllers\ProductController@index')->name('product.index');
+// Admin crud of products
+Route::get('create-product','App\Http\Controllers\ProductController@create')->name('product.create');
+Route::post('store','App\Http\Controllers\ProductController@store')->name('product.store');
+Route::get('edit-product/{id}','App\Http\Controllers\ProductController@edit');
+Route::post('update-product/{id}','App\Http\Controllers\ProductController@update');
+Route::get('delete-product/{id}','App\Http\Controllers\ProductController@delete');
 
-Route::get('/edit-product', function () {
-    return view('product.edit');
-});
+// Customer menu
+Route::get('menu','App\Http\Controllers\MenuController@index')->name('menu.index');
 
-Route::get('/basket', function () {
-    return view('basket.index');
-});
+// Customer basket
+Route::get('basket','App\Http\Controllers\ProductController@basketIndex')->name('basket.index');
+Route::get('add-basket/{id}','App\Http\Controllers\ProductController@addToBasket');
+Route::get('delete-basket/{id}','App\Http\Controllers\ProductController@deleteFromBasket');
 
-Route::get('/checkout', function () {
-    return view('checkout.index');
-});
+//Checkout
+Route::get('checkout','App\Http\Controllers\ProductController@checkoutIndex')->name('checkout.index');
+Route::post('checkout-store','App\Http\Controllers\ProductController@checkoutStore')->name('checkout.store');
 
 Route::get('/contact-us', function () {
     return view('contact.index');
@@ -50,5 +70,4 @@ Route::get('/contact-us', function () {
 
 // Auth::routes();
 
-//Product
-// Route::get('products','ProductController@index')->name('product.index');
+
