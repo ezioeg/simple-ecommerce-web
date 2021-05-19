@@ -85,6 +85,21 @@
                 position: absolute;
                 right: 5px;
             }
+
+            .disabled {
+                cursor: not-allowed;
+                opacity: 0.5;
+                text-decoration: none;
+                pointer-events: none;
+            }
+            .alert {
+                text-align: center;
+                background-color: black;
+                padding: 10px 0px;
+                margin: 300px 800px;
+                font-size: 20px;
+                color: white;
+            }
         </style>
     </head>
 
@@ -93,28 +108,43 @@
             <img src="images/logo.png" class="logo" width="300" height="300" />
 
             <div class="header-container">
-                <button class="button">Basket</button>
+                <a class="button" href="#">Basket</a>
 
-                <button class="button register">Register</button>
-                <button class="button login">Login</button>
+                <a class="button register" href="#">Register</a>
+                <a class="button login" href="#">Login</a>
+
+                <!-- Success message for every CRUD operation  -->
+                @if($message = Session::get('success'))
+                <div class="alert">
+                    <p>Message: {{ $message }}</p>
+                </div>
+                @endif
             </div>
 
             <!-- products list-->
             <div class="grid-container">
+                @if(session('basket')) @php $total = 0 @endphp
+                @foreach(session('basket') as $id => $product)
                 <div class="grid-item">
                     <div class="product-img">
                         <!--added limit size for image(max-width)-->
                         <img
                             class="img"
                             style="max-width: 150px"
-                            src="images/product1.jpg"
+                            src="{{ $product['photo'] }}"
                             alt=""
                         />
                     </div>
+                    <!-- <p class="name-price"> {{ $product["quantity"] }}</p> -->
                     <div class="product-info">
-                        <p class="name-price">Loaded Chips: £5.99</p>
+                        <p class="name-price">
+                            {{ $product["name"] }} : £{{ $product["price"] }}
+                        </p>
 
-                        <a href="">
+                        <a
+                            href="{{ url('delete-basket', [$id]) }}"
+                            onclick="return confirm('Do you want to remove from the basket?')"
+                        >
                             <img
                                 class="img"
                                 style="max-width: 50px"
@@ -123,58 +153,35 @@
                         /></a>
                     </div>
                 </div>
-                <div class="grid-item">
-                    <div class="product-img">
-                        <!--added limit size for image(max-width)-->
-                        <img
-                            class="img"
-                            style="max-width: 150px"
-                            src="images/product1.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="product-info">
-                        <p class="name-price">Loaded Chips: £5.99</p>
-
-                        <a href="">
-                            <img
-                                class="img"
-                                style="max-width: 50px"
-                                src="images/delete.png"
-                                alt=""
-                        /></a>
-                    </div>
-                </div>
-                <div class="grid-item">
-                    <div class="product-img">
-                        <!--added limit size for image(max-width)-->
-                        <img
-                            class="img"
-                            style="max-width: 150px"
-                            src="images/product1.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div class="product-info">
-                        <p class="name-price">Loaded Chips: £5.99</p>
-
-                        <a href="">
-                            <img
-                                class="img"
-                                style="max-width: 50px"
-                                src="images/delete.png"
-                                alt=""
-                        /></a>
-                    </div>
-                </div>
+                @php if(!$basket->isEmpty()){ $total += $product['price'] *
+                $product['quantity']; } @endphp @endforeach
             </div>
 
             <p class="header-container">
-                <b class="button">TOTAL: £15</b>
+                <b class="button">TOTAL: £{{ $total }}</b>
             </p>
+            @endif
 
-            <button class="button cancel-button">Cancel order</button>
-            <button class="button checkout-button">Proceed to checkout</button>
+            <a class="button cancel-button" href="{{ route('menu.index') }}"
+                >Cancel order</a
+            >
+
+            @if(session('basket'))
+            <a
+                class="button checkout-button"
+                href="{{ route('checkout.index') }}"
+            >
+                Proceed to checkout
+            </a>
+            @else
+            <a
+                class="disabled button checkout-button"
+                href="{{ route('checkout.index') }}"
+            >
+                Proceed to checkout
+            </a>
+
+            @endif
         </div>
     </body>
 </html>

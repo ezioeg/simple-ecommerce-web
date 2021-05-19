@@ -40,16 +40,22 @@
                 position: absolute;
                 right: 5px;
             }
+
+            .alert {
+                text-align: center;
+                margin: 200px 800px;
+                font-size: 20px;
+            }
         </style>
     </head>
 
     <body>
         <div>
             <div class="header-container">
-                <button class="button">Admin panel</button>
+                <a class="button">Admin Panel</a>
 
-                <button class="button register">Register</button>
-                <button class="button login">Login</button>
+                <a class="button register">Register</a>
+                <a class="button login">Login</a>
             </div>
 
             <div class="w3-container">
@@ -57,30 +63,49 @@
 
                 <table class="w3-table">
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Points</th>
+                        <th>Name</th>
+                        <th>Photo</th>
+                        <th>Price</th>
+                        <th>Action</th>
                     </tr>
+
+                    @foreach($product as $pro)
                     <tr>
-                        <td>Jill</td>
-                        <td>Smith</td>
-                        <td>50</td>
+                        <td>{{ $pro->name }}</td>
+                        <td>
+                            <img
+                                src="{{ URL::to($pro->photo) }}"
+                                height="70px"
+                                width="80px"
+                            />
+                        </td>
+                        <td>${{ $pro->price }}</td>
+                        <td>
+                            <a href="{{ URL::to('edit-product/'.$pro->id) }}"
+                                >Edit</a
+                            >
+                            <a
+                                href="{{ URL::to('delete-product/'.$pro->id) }}"
+                                onclick="return confirm('Do you want to remove this product?')"
+                                >Delete</a
+                            >
+                        </td>
                     </tr>
-                    <tr>
-                        <td>Eve</td>
-                        <td>Jackson</td>
-                        <td>94</td>
-                    </tr>
-                    <tr>
-                        <td>Adam</td>
-                        <td>Johnson</td>
-                        <td>67</td>
-                    </tr>
+                    @endforeach
                 </table>
             </div>
 
-            <button class="button back-button">Back</button>
-            <button class="button create-button">Create product</button>
+            <!-- Success message for every CRUD operation  -->
+            @if($message = Session::get('success'))
+            <div class="alert">
+                <p>{{ $message }}</p>
+            </div>
+            @endif
+
+            <!-- <a class="button back-button" href="#">Back</a> -->
+            <a class="button create-button" href="{{ route('product.create') }}"
+                >Create product</a
+            >
         </div>
     </body>
 </html>

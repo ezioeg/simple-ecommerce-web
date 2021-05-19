@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link
+            rel="stylesheet"
+            href="https://www.w3schools.com/w3css/4/w3.css"
+        />
         <style>
             .header-container {
                 flex-grow: 1;
@@ -18,7 +22,6 @@
             }
 
             /* CONTACT FORM */
-
             .flex-container {
                 display: flex;
                 justify-content: center;
@@ -30,7 +33,8 @@
                 padding: 20px;
             }
 
-            input[type="text"] {
+            input[type="text"],
+            input[type="file"] {
                 width: 100%;
                 padding: 12px;
                 box-sizing: border-box;
@@ -49,6 +53,9 @@
                 position: absolute;
                 bottom: 5px;
                 left: 5px;
+                text-transform: uppercase;
+                cursor: pointer;
+                padding: 32px 64px;
             }
 
             .register {
@@ -65,16 +72,22 @@
     <body>
         <div>
             <div class="header-container">
-                <button class="button">Admin Panel</button>
+                <a class="button">Admin Panel</a>
 
-                <button class="button register">Register</button>
-                <button class="button login">Login</button>
+                <a class="button register">Register</a>
+                <a class="button login">Login</a>
             </div>
 
             <div class="flex-container">
                 <div class="form-container">
                     <h2 class="" style="text-align: center">Create product</h2>
-                    <form action="#">
+                    <form
+                        action="{{ route('product.store') }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                    >
+                        @csrf
+
                         <label for="pname">Name</label>
                         <input
                             type="text"
@@ -82,11 +95,11 @@
                             name="name"
                             placeholder="Product name.."
                         />
-                        <label for="pimage">Photo</label>
+                        <label for="pphoto">Photo</label>
                         <input
-                            type="text"
-                            id="image"
-                            name="image"
+                            type="file"
+                            id="photo"
+                            name="photo"
                             placeholder="Product photo.."
                         />
 
@@ -102,7 +115,11 @@
                     </form>
                 </div>
             </div>
-            <button class="button back-button">Back</button>
+            <div>
+                <a class="back-button" href="{{ route('product.index') }}">
+                    Back
+                </a>
+            </div>
         </div>
     </body>
 </html>

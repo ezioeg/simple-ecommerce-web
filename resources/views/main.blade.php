@@ -157,13 +157,15 @@
             <img src="images/logo.png" class="logo" width="300" height="300" />
 
             <div class="header-container">
-                <button class="button">Home</button>
-                <button class="button">Menu</button>
-                <button class="button">Basket</button>
-                <button class="button">Checkout</button>
+                <a class="button" href="{{ url('/') }}">Home</a>
+                <a class="button" href="{{ route('menu.index') }}">Menu</a>
+                <a class="button" href="{{ route('basket.index') }}">Basket</a>
+                <a class="button" href="{{ route('checkout.index') }}"
+                    >Checkout</a
+                >
 
-                <button class="button register">Register</button>
-                <button class="button login">Login</button>
+                <a class="button register" href="#">Register</a>
+                <a class="button login" href="#">Login</a>
 
                 <h1 class="title">British Chip Kitchen</h1>
             </div>
@@ -193,7 +195,10 @@
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
-            <button class="button contact-button">Contact us</button>
+
+            <a class="button contact-button" href="{{ route('contact.index') }}"
+                >Contact us</a
+            >
         </div>
         <script>
             var slideIndex = 1;

@@ -38,6 +38,9 @@ Route::get('/', function () {
 // Route::get('/checkout', function () {
 //     return view('checkout.index');
 // });
+// Route::get('/contact-us', function () {
+//     return view('contact.index');
+// });
 
 //Logged in
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
@@ -60,14 +63,13 @@ Route::get('basket','App\Http\Controllers\ProductController@basketIndex')->name(
 Route::get('add-basket/{id}','App\Http\Controllers\ProductController@addToBasket');
 Route::get('delete-basket/{id}','App\Http\Controllers\ProductController@deleteFromBasket');
 
-//Checkout
+// Customer Checkout
 Route::get('checkout','App\Http\Controllers\ProductController@checkoutIndex')->name('checkout.index');
 Route::post('checkout-store','App\Http\Controllers\ProductController@checkoutStore')->name('checkout.store');
 
-Route::get('/contact-us', function () {
-    return view('contact.index');
-});
-
+// Customer Contact
+Route::get('contact-us','App\Http\Controllers\ContactController@index')->name('contact.index');
+Route::post('contact-store','App\Http\Controllers\ContactController@store')->name('contact.store');
 // Auth::routes();
 
 

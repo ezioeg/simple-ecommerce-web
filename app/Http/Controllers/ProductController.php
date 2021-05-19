@@ -60,7 +60,7 @@ class ProductController extends Controller
             $data['photo'] = $photo_url;
             $product = DB::table('products')->insert($data);
             return redirect()->route('product.index')
-                        ->with('success','Product created successfully');
+                        ->with('success','Product created successfully!');
         }
     }
 
@@ -111,7 +111,7 @@ class ProductController extends Controller
             $data['photo'] = $photo_url;
             $product = DB::table('products')->where('id',$id)->update($data);
             return redirect()->route('product.index')
-                        ->with('success','Product updated successfully');
+                        ->with('success','Product updated successfully!');
         }
     }
 
@@ -126,12 +126,12 @@ class ProductController extends Controller
         $data = DB::table('products')->where('id',$id)->first();
         $product = DB::table('products')->where('id',$id)->delete();
         return redirect()->route('product.index')
-                        ->with('success','Product deleted successfully');
+                        ->with('success','Product deleted successfully!');
     }
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------//
-//----------------------------------------------------------------Basket section----------------------------------------------------------------//
+//----------------------------------------------------------------Basket section--------------------------------------------------------------//
 //--------------------------------------------------------------------------------------------------------------------------------------------//
 
     public function basketIndex()
@@ -156,13 +156,13 @@ class ProductController extends Controller
                         ]
                 ];
                 session()->put('basket', $basket);
-                return redirect()->route('menu.index')->with('success','Added to Basket');
+                return redirect()->route('menu.index')->with('success','Added to basket!');
             }
             // if favourite not empty then check if this product exist then increment quantity
             if(isset($basket[$id])) {
                 $basket[$id]['quantity']++;
                 session()->put('basket', $basket);
-                return redirect()->route('menu.index')->with('success','Added to Basket');
+                return redirect()->route('menu.index')->with('success','Added to basket!');
             }
             // if item not exist in favourite then add to basket with quantity = 1
             $basket[$id] = [
@@ -173,7 +173,7 @@ class ProductController extends Controller
             ];
 
             session()->put('basket', $basket);
-            return redirect()->route('menu.index')->with('success','Added to Basket');
+            return redirect()->route('menu.index')->with('success','Added to basket!');
         }
 
     public function deleteFromBasket($id){
@@ -185,7 +185,7 @@ class ProductController extends Controller
                 session()->put('basket', $basket);
             }
 
-        return redirect()->route('basket.index')->with('success','Removed from favourite');
+        return redirect()->route('basket.index')->with('success','Removed from basket!');
     }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------//
@@ -194,7 +194,6 @@ class ProductController extends Controller
 
     public function checkoutIndex()
     {
-        //changed from table('favourites')
         $basket = DB::table('products')->get();
         return view('checkout.index', compact('basket'));
     }
@@ -217,8 +216,7 @@ class ProductController extends Controller
 
         $request->session()->forget('basket');
         $checkout = DB::table('checkouts')->insert($data);
-        return redirect()->route('home')->with('success','Order placed successfully');
+        return redirect()->route('menu.index')->with('success','Order placed successfully!');
     }
-
 
 }

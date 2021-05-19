@@ -46,7 +46,8 @@
                 cursor: pointer;
             }
 
-            #map {
+            #map,
+            .map {
                 width: 100%;
                 height: 400px;
             }
@@ -92,6 +93,14 @@
                 position: absolute;
                 right: 5px;
             }
+            .alert {
+                text-align: center;
+                background-color: black;
+                padding: 10px 0px;
+                margin: 0px 800px;
+                font-size: 20px;
+                color: white;
+            }
         </style>
     </head>
 
@@ -100,13 +109,15 @@
             <img src="images/logo.png" class="logo" width="300" height="300" />
 
             <div class="header-container">
-                <button class="button">Home</button>
-                <button class="button">Menu</button>
-                <button class="button">Basket</button>
-                <button class="button">Checkout</button>
+                <a class="button" href="{{ url('/') }}">Home</a>
+                <a class="button" href="{{ route('menu.index') }}">Menu</a>
+                <a class="button" href="{{ route('basket.index') }}">Basket</a>
+                <a class="button" href="{{ route('checkout.index') }}"
+                    >Checkout</a
+                >
 
-                <button class="button register">Register</button>
-                <button class="button login">Login</button>
+                <a class="button register" href="#">Register</a>
+                <a class="button login" href="#">Login</a>
             </div>
             <div class="header-container">
                 <button class="contact-button">Contact us</button>
@@ -114,19 +125,24 @@
 
             <div class="flex-container">
                 <div class="form-container">
-                    <form action="#">
-                        <label for="fname">Full name</label>
+                    <form
+                        action="{{ route('contact.store') }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                    >
+                        @csrf
+                        <label for="fullname">Full name</label>
                         <input
                             type="text"
-                            id="fname"
-                            name="firstname"
+                            id="fullname"
+                            name="fullname"
                             placeholder="Your name.."
                         />
-                        <label for="lname">Email</label>
+                        <label for="email">Email</label>
                         <input
                             type="text"
                             id="email"
-                            name="e-mail"
+                            name="email"
                             placeholder="Your email.."
                         />
 
@@ -142,35 +158,17 @@
                     </form>
                 </div>
                 <!--The div element for the map -->
-                <div id="map"></div>
+                <div id="map">
+                    <img class="map" src="images/map.png" alt="" />
+                </div>
             </div>
 
-            <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-            <script
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJZoOAsy1bUsjVd39LE6UHSMEtTtKr0rI&callback=initMap&libraries=&v=weekly"
-                async
-            ></script>
+            <!-- Success message for every CRUD operation  -->
+            @if($message = Session::get('success'))
+            <div class="alert">
+                <p>Message: {{ $message }}</p>
+            </div>
+            @endif
         </div>
-
-        <script>
-            // Initialize and add the map
-            function initMap() {
-                // The location of Uluru
-                const uluru = { lat: -25.344, lng: 131.036 };
-                // The map, centered at Uluru
-                const map = new google.maps.Map(
-                    document.getElementById("map"),
-                    {
-                        zoom: 12,
-                        center: uluru,
-                    }
-                );
-                // The marker, positioned at Uluru
-                const marker = new google.maps.Marker({
-                    position: uluru,
-                    map: map,
-                });
-            }
-        </script>
     </body>
 </html>

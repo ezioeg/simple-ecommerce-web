@@ -133,10 +133,10 @@
         <div>
             <img src="images/logo.png" class="logo" width="300" height="300" />
             <div class="header-container">
-                <button class="button">Checkout</button>
+                <a class="button" href="#">Checkout</a>
 
-                <button class="button register">Register</button>
-                <button class="button login">Login</button>
+                <a class="button register" href="#">Register</a>
+                <a class="button login" href="#">Login</a>
             </div>
             <div class="flex-container">
                 <div class="row">
@@ -149,42 +149,50 @@
                                     <b>4</b></span
                                 >
                             </h4>
+
+                            @if(session('basket')) @php $total = 0 @endphp
+                            @foreach(session('basket') as $id => $product)
                             <p style="color: white">
-                                Product 1
-                                <span class="price">£15</span>
+                                {{ $product["name"] }} x
+                                {{ $product["quantity"] }}
+                                <span class="price"
+                                    >£{{ $product["price"] }}</span
+                                >
                             </p>
-                            <p style="color: white">
-                                Product 2
-                                <span class="price">£5</span>
-                            </p>
-                            <p style="color: white">
-                                Product 3
-                                <span class="price">£8</span>
-                            </p>
-                            <p style="color: white">
-                                Product 4
-                                <span class="price">£2</span>
-                            </p>
+
+                            @php if(!$basket->isEmpty()){ $total +=
+                            $product['price'] * $product['quantity']; } @endphp
+                            @endforeach
+
                             <hr />
                             <p style="color: white">
                                 Total
-                                <span class="price"><b>£30</b></span>
+                                <span class="price"
+                                    ><b>£{{ $total }}</b></span
+                                >
                             </p>
+                            @endif
                         </div>
                     </div>
                     <div class="col-75">
                         <div class="checkout-container">
-                            <form action="#">
+                            <form
+                                action="{{ route('checkout.store') }}"
+                                method="POST"
+                                enctype="multipart/form-data"
+                            >
+                                @csrf
+
                                 <div class="row">
                                     <div class="col-50">
                                         <h3 style="color: white">
                                             Billing Address
                                         </h3>
-                                        <label for="fname">Full Name</label>
+                                        <label for="fullname">Full Name</label>
                                         <input
                                             type="text"
-                                            id="fname"
-                                            name="firstname"
+                                            id="fullname"
+                                            name="fullname"
                                             placeholder="John M. Doe"
                                         />
                                         <label for="email"> Email</label>
@@ -194,10 +202,10 @@
                                             name="email"
                                             placeholder="john@example.com"
                                         />
-                                        <label for="adr"> Address</label>
+                                        <label for="address"> Address</label>
                                         <input
                                             type="text"
-                                            id="adr"
+                                            id="address"
                                             name="address"
                                             placeholder="Abbey Road"
                                         />
@@ -254,19 +262,21 @@
                                                 style="color: orange"
                                             ></i>
                                         </div>
-                                        <label for="cname">Name on Card</label>
+                                        <label for="cardname"
+                                            >Name on Card</label
+                                        >
                                         <input
                                             type="text"
-                                            id="cname"
+                                            id="cardname"
                                             name="cardname"
                                             placeholder="John More Doe"
                                         />
-                                        <label for="ccnum"
+                                        <label for="cardnumber"
                                             >Credit card number</label
                                         >
                                         <input
                                             type="text"
-                                            id="ccnum"
+                                            id="cardnumber"
                                             name="cardnumber"
                                             placeholder="1111-2222-3333-4444"
                                         />
@@ -300,6 +310,14 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <input
+                                        hidden
+                                        type="text"
+                                        id="total"
+                                        name="total"
+                                        value="{{ $total }}"
+                                    />
                                 </div>
 
                                 <input

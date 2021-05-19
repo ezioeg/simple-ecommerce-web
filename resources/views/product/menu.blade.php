@@ -62,36 +62,52 @@
                 position: absolute;
                 right: 5px;
             }
+            .alert {
+                text-align: center;
+                background-color: black;
+                padding: 10px 0px;
+                margin: 0px 800px;
+                font-size: 20px;
+                color: white;
+            }
         </style>
     </head>
-
     <body>
         <div>
             <img src="images/logo.png" class="logo" width="300" height="300" />
 
             <div class="header-container">
-                <button class="button">Home</button>
-                <button class="button">Menu</button>
-                <button class="button">Basket</button>
-                <button class="button">Checkout</button>
+                <a class="button" href="{{ url('/') }}">Home</a>
+                <a class="button" href="{{ route('menu.index') }}">Menu</a>
+                <a class="button" href="{{ route('basket.index') }}">Basket</a>
+                <a class="button" href="{{ route('checkout.index') }}"
+                    >Checkout</a
+                >
 
-                <button class="button register">Register</button>
-                <button class="button login">Login</button>
+                <a class="button register" href="#">Register</a>
+                <a class="button login" href="#">Login</a>
+
             </div>
 
             <!-- products list-->
             <div class="grid-container">
+                {{-- {{$products}} --}} @if(count($product)>0) @foreach($product
+                as $pro)
+
                 <div class="grid-item">
                     <!--added limit size for image(max-width)-->
+                    @php $photo=explode(',',$pro->photo); @endphp
                     <img
                         class="img"
                         style="max-width: 250px"
-                        src="images/product1.jpg"
-                        alt=""
+                        src="{{ $photo[0] }}"
+                        alt="{{ $photo[0] }}"
                     />
-                    <p class="name-price">Loaded Chips: £5.99</p>
+                    <p class="name-price">
+                        {{ $pro->name }}: £{{ $pro->price }}
+                    </p>
 
-                    <a href="">
+                    <a href="{{ url('add-basket/'.$pro->id) }}"">
                         <img
                             class="img"
                             style="max-width: 80px"
@@ -99,61 +115,20 @@
                             alt=""
                     /></a>
                 </div>
-                <div class="grid-item">
-                    <!--added limit size for image(max-width)-->
-                    <img
-                        class="img"
-                        style="max-width: 250px"
-                        src="images/product1.jpg"
-                        alt=""
-                    />
-                    <p class="name-price">Loaded Chips: £5.99</p>
-
-                    <a href="">
-                        <img
-                            class="img"
-                            style="max-width: 80px"
-                            src="images/basket.png"
-                            alt=""
-                    /></a>
-                </div>
-                <div class="grid-item">
-                    <!--added limit size for image(max-width)-->
-                    <img
-                        class="img"
-                        style="max-width: 250px"
-                        src="images/product1.jpg"
-                        alt=""
-                    />
-                    <p class="name-price">Loaded Chips: £5.99</p>
-
-                    <a href="">
-                        <img
-                            class="img"
-                            style="max-width: 80px"
-                            src="images/basket.png"
-                            alt=""
-                    /></a>
-                </div>
-                <div class="grid-item">
-                    <!--added limit size for image(max-width)-->
-                    <img
-                        class="img"
-                        style="max-width: 250px"
-                        src="images/product1.jpg"
-                        alt=""
-                    />
-                    <p class="name-price">Loaded Chips: £5.99</p>
-
-                    <a href="">
-                        <img
-                            class="img"
-                            style="max-width: 80px"
-                            src="images/basket.png"
-                            alt=""
-                    /></a>
-                </div>
+                @endforeach @else
+                <h4 class="empty-text" style="margin: 100px auto">
+                    There are no products.
+                </h4>
+                @endif
+ 
             </div>
+
+            <!-- Success message for every CRUD operation  -->
+            @if($message = Session::get('success'))
+            <div class="alert">
+                <p> Message: {{$message}} </p>
+            </div>  
+            @endif
         </div>
     </body>
 </html>
