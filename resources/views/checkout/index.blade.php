@@ -18,8 +18,17 @@
             <div class="header-container">
                 <a class="button" href="#">Checkout</a>
 
-                <a class="button register" href="#">Register</a>
-                <a class="button login" href="#">Login</a>
+                @if (Route::has('login')) @auth
+                <a class="button register">Hello, {{Auth::user()->name}}</a>
+                <a class="button login" href="{{ url('/logout') }}"> logout </a>
+                @else
+                <a class="button login" href="{{ route('login') }}">Login</a>
+                <!--register button-->
+                @if (Route::has('register'))
+                <a class="button register" href="{{ route('register') }}"
+                    >Register</a
+                >
+                @endif @endauth @endif
             </div>
             <div class="flex-container">
                 <div class="row">
