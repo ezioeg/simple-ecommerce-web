@@ -30,11 +30,7 @@ body {
     font-size: 80px;
 }
 
-/* ----- CICONS ----- */
-.icons-container {
-    text-align: center;
-    background-image: url("images/icons-bg.jpg");
-}
+/* ----- ICONS ----- */
 .fa {
     padding: 10px;
     font-size: 20px;

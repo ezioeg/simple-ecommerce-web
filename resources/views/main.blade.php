@@ -11,6 +11,12 @@
             href="{{ url('/css/home.css') }}"
         />
     </head>
+    <style>
+        .icons-container {
+            background-image: url("images/icons-bg.jpg");
+            text-align: center;
+        }
+    </style>
 
     <body>
         <div>
