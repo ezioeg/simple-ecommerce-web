@@ -1,107 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            body {
-                background-image: url("images/bg.jpeg");
-            }
-
-            /* HEADER */
-            .logo {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-            }
-
-            .header-container {
-                flex-grow: 1;
-                text-align: center;
-            }
-
-            .button {
-                background-color: black;
-                border: 1px;
-                color: white;
-                padding: 32px 64px;
-                text-align: center;
-                text-decoration: none;
-                text-transform: uppercase;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-
-            .contact-button {
-                background-color: black;
-                border: 1px;
-                color: white;
-                padding: 32px 256px;
-                text-align: center;
-                text-decoration: none;
-                text-transform: uppercase;
-                display: inline-block;
-                font-size: 16px;
-                margin: 35px 2px;
-                cursor: pointer;
-            }
-
-            #map,
-            .map {
-                width: 100%;
-                height: 400px;
-            }
-
-            /* CONTACT FORM */
-            .flex-container {
-                display: flex;
-                justify-content: center;
-                padding: 50px 200px;
-            }
-
-            .form-container {
-                /* width: 100%; */
-                background-color: black;
-                color: white;
-                padding: 20px;
-                margin-right: 20px;
-            }
-
-            input[type="text"],
-            textarea {
-                width: 100%;
-                padding: 12px;
-                box-sizing: border-box;
-                margin-top: 6px;
-                margin-bottom: 16px;
-                resize: vertical;
-            }
-
-            input[type="submit"] {
-                background-color: white;
-                color: black;
-                padding: 12px 20px;
-                border: none;
-                cursor: pointer;
-            }
-
-            .register {
-                position: absolute;
-                right: 190px;
-            }
-            .login {
-                position: absolute;
-                right: 5px;
-            }
-            .alert {
-                text-align: center;
-                background-color: black;
-                padding: 10px 0px;
-                margin: 0px 800px;
-                font-size: 20px;
-                color: white;
-            }
-        </style>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url('/css/contact.css') }}"
+        />
     </head>
 
     <body>
@@ -165,7 +69,7 @@
 
             <!-- Success message for every CRUD operation  -->
             @if($message = Session::get('success'))
-            <div class="alert">
+            <div class="success-message">
                 <p>Message: {{ $message }}</p>
             </div>
             @endif

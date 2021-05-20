@@ -14,7 +14,6 @@ class ProductController extends Controller
 //----------------------------------------------------------------Product section-------------------------------------------------------------//
 //--------------------------------------------------------------------------------------------------------------------------------------------//
 
-
     /**
      * Display a listing of the resource.
      *
@@ -129,7 +128,6 @@ class ProductController extends Controller
                         ->with('success','Product deleted successfully!');
     }
 
-
 //--------------------------------------------------------------------------------------------------------------------------------------------//
 //----------------------------------------------------------------Basket section--------------------------------------------------------------//
 //--------------------------------------------------------------------------------------------------------------------------------------------//
@@ -145,7 +143,7 @@ class ProductController extends Controller
             $product = Product::find($id);
 
             $basket = session()->get('basket');
-            // if favourite is empty then this the first product
+            // if basket is empty then this the first product
             if(!$basket) {
                 $basket = [
                         $id => [
@@ -158,13 +156,13 @@ class ProductController extends Controller
                 session()->put('basket', $basket);
                 return redirect()->route('menu.index')->with('success','Added to basket!');
             }
-            // if favourite not empty then check if this product exist then increment quantity
+            // if basket not empty then check if this product exist then increment quantity
             if(isset($basket[$id])) {
                 $basket[$id]['quantity']++;
                 session()->put('basket', $basket);
                 return redirect()->route('menu.index')->with('success','Added to basket!');
             }
-            // if item not exist in favourite then add to basket with quantity = 1
+            // if item not exist in basket then add to basket with quantity = 1
             $basket[$id] = [
                 'name' => $product->name,
                 'photo'=> $product->photo,

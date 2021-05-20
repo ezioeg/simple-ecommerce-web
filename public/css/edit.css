@@ -1,0 +1,57 @@
+/* ----- HEADER ----- */
+.header-container {
+    flex-grow: 1;
+    text-align: center;
+}
+.button {
+    padding: 32px 64px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* ----- CONTACT FORM ----- */
+.flex-container {
+    display: flex;
+    justify-content: center;
+    padding: 100px 200px;
+}
+.form-container {
+    /* width: 50%; */
+    padding: 20px;
+}
+input[type="text"],
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+input[type="submit"] {
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+/* ----- CONTACT FORM ----- */
+.back-button {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 32px 64px;
+}
+.register {
+    position: absolute;
+    right: 190px;
+}
+.login {
+    position: absolute;
+    right: 5px;
+}

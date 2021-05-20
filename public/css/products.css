@@ -1,0 +1,41 @@
+/* ----- HEADER ----- */
+.header-container {
+    flex-grow: 1;
+    text-align: center;
+}
+.button {
+    padding: 32px 64px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* ----- BUTTONS ----- */
+.back-button {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+.create-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+.register {
+    position: absolute;
+    right: 190px;
+}
+.login {
+    position: absolute;
+    right: 5px;
+}
+
+/* ----- MESSAGES ----- */
+.message {
+    text-align: center;
+    margin: 200px 800px;
+    font-size: 20px;
+}

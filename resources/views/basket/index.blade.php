@@ -1,106 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            body {
-                background-image: url("images/bg.jpeg");
-            }
-
-            /* HEADER */
-            .logo {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-            }
-
-            .header-container {
-                flex-grow: 1;
-                text-align: center;
-            }
-
-            .button {
-                background-color: black;
-                border: 1px;
-                color: white;
-                padding: 32px 64px;
-                text-align: center;
-                text-decoration: none;
-                text-transform: uppercase;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-
-            /* ITEMS */
-            .grid-container {
-                display: grid;
-                grid-template-columns: auto auto auto auto;
-                padding: 20px 400px;
-                grid-gap: 20px;
-            }
-
-            .grid-item {
-                /* border: 1px solid black; */
-                display: flex;
-                align-items: stretch;
-                /* max-width: 320px; */
-                margin: auto;
-                padding-bottom: 15px;
-            }
-
-            .name-price {
-                background-color: black;
-                color: white;
-                padding: 10px 5px;
-            }
-
-            .cancel-button {
-                position: absolute;
-                background-color: white;
-                color: black;
-                bottom: 5px;
-                left: 5px;
-            }
-
-            .checkout-button {
-                position: absolute;
-                bottom: 5px;
-                right: 5px;
-            }
-
-            .product-img {
-                padding-top: 16px;
-            }
-
-            .product-info {
-                padding-left: 10px;
-            }
-
-            .register {
-                position: absolute;
-                right: 190px;
-            }
-            .login {
-                position: absolute;
-                right: 5px;
-            }
-
-            .disabled {
-                cursor: not-allowed;
-                opacity: 0.5;
-                text-decoration: none;
-                pointer-events: none;
-            }
-            .alert {
-                text-align: center;
-                background-color: black;
-                padding: 10px 0px;
-                margin: 300px 800px;
-                font-size: 20px;
-                color: white;
-            }
-        </style>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url('/css/basket.css') }}"
+        />
     </head>
 
     <body>
@@ -115,7 +20,7 @@
 
                 <!-- Success message for every CRUD operation  -->
                 @if($message = Session::get('success'))
-                <div class="alert">
+                <div class="success-message">
                     <p>Message: {{ $message }}</p>
                 </div>
                 @endif
@@ -174,6 +79,7 @@
                 Proceed to checkout
             </a>
             @else
+            <div class="message">There are no products in the basket</div>
             <a
                 class="disabled button checkout-button"
                 href="{{ route('checkout.index') }}"

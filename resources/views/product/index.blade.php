@@ -5,48 +5,11 @@
             rel="stylesheet"
             href="https://www.w3schools.com/w3css/4/w3.css"
         />
-        <style>
-            .header-container {
-                flex-grow: 1;
-                text-align: center;
-            }
-
-            .button {
-                padding: 32px 64px;
-                text-align: center;
-                text-decoration: none;
-                text-transform: uppercase;
-                display: inline-block;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-
-            .back-button {
-                position: absolute;
-                bottom: 5px;
-                left: 5px;
-            }
-            .create-button {
-                position: absolute;
-                bottom: 5px;
-                right: 5px;
-            }
-
-            .register {
-                position: absolute;
-                right: 190px;
-            }
-            .login {
-                position: absolute;
-                right: 5px;
-            }
-
-            .alert {
-                text-align: center;
-                margin: 200px 800px;
-                font-size: 20px;
-            }
-        </style>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{{ url('/css/products.css') }}"
+        />
     </head>
 
     <body>
@@ -97,7 +60,7 @@
 
             <!-- Success message for every CRUD operation  -->
             @if($message = Session::get('success'))
-            <div class="alert">
+            <div class="message">
                 <p>{{ $message }}</p>
             </div>
             @endif
