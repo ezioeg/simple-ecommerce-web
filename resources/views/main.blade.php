@@ -11,13 +11,6 @@
             href="{{ url('/css/home.css') }}"
         />
     </head>
-    <style>
-        .icons-container {
-            background-image: url("images/icons-bg.jpg");
-            text-align: center;
-        }
-    </style>
-
     <body>
         <div>
             <img src="images/logo.png" class="logo" width="300" height="300" />
@@ -48,7 +41,9 @@
                 <h1 class="title">British Chip Kitchen</h1>
             </div>
 
-            <div class="icons-container">
+            <div
+                style="background-image: url('images/icons-bg.jpg'); text-align: center;"
+            >
                 <span>
                     <a href="#" class="fa fa-facebook"></a>
                     <a href="#" class="fa fa-twitter"></a>
