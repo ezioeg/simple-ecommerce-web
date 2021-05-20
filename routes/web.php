@@ -42,11 +42,12 @@ Route::get('/', function () {
 //     return view('contact.index');
 // });
 
-// Auth::routes();
+// Auth
+Auth::routes();
 
-// Logged in
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-// Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 
 // Admin product list
 Route::get('products','App\Http\Controllers\ProductController@index')->name('product.index');
@@ -72,6 +73,3 @@ Route::post('checkout-store','App\Http\Controllers\ProductController@checkoutSto
 // Customer contact
 Route::get('contact-us','App\Http\Controllers\ContactController@index')->name('contact.index');
 Route::post('contact-store','App\Http\Controllers\ContactController@store')->name('contact.store');
-
-
-
