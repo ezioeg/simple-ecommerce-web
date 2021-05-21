@@ -28,11 +28,11 @@
                 @endif @endauth @endif
 
                 <!-- Success message for every CRUD operation  -->
-                @if($message = Session::get('success'))
+                <!-- @if($message = Session::get('success'))
                 <div class="success-message">
                     <p>Message: {{ $message }}</p>
                 </div>
-                @endif
+                @endif -->
             </div>
 
             <!-- products list-->
