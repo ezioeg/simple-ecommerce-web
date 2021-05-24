@@ -56,6 +56,11 @@
                             value="{{$product->name}}"
                         />
                         <label for="pphoto">Photo</label>
+                        <img
+                            src="{{ URL::to($product->photo) }}"
+                            height="70px"
+                            width="80px"
+                        />
                         <input
                             type="file"
                             id="photo"
