@@ -43,11 +43,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //defining array for data storage
+         // Field validation
+         $this->validate($request, [
+ 
+            'name' => 'required',
+            'price' => 'required',
+            'photo' => 'required'
+ 
+        ]); 
+
+        // Defining array for data storage
         $data = array();
         $data['name'] = $request->name;
         $data['price'] = $request->price;
-        $photo = $request->file('photo');
+        $photo = $request->file('photo'); 
         if($photo) {
             $photo_name = date('dmy_H_s_i');
             $ext = strtolower($photo->getClientOriginalExtension());
@@ -55,12 +64,13 @@ class ProductController extends Controller
             $upload_path = 'public/media/';
             $photo_url = $upload_path.$photo_full_name;
             $success = $photo->move($upload_path,$photo_full_name);
-
             $data['photo'] = $photo_url;
-            $product = DB::table('products')->insert($data);
+        }
+
+        $product = DB::table('products')->insert($data);
             return redirect()->route('product.index')
                         ->with('success','Product created successfully!');
-        }
+       
     }
 
     /**
@@ -95,6 +105,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // Field validation
+        $this->validate($request, [
+ 
+            'name' => 'required',
+            'price' => 'required'
+ 
+        ]); 
+
         $data = array();
         $data['name'] = $request->name;
         $data['price'] = $request->price;
@@ -106,12 +125,13 @@ class ProductController extends Controller
             $upload_path = 'public/media/';
             $photo_url = $upload_path.$photo_full_name;
             $success = $photo->move($upload_path,$photo_full_name);
-
             $data['photo'] = $photo_url;
-            $product = DB::table('products')->where('id',$id)->update($data);
-            return redirect()->route('product.index')
-                        ->with('success','Product updated successfully!');
         }
+
+        $product = DB::table('products')->where('id',$id)->update($data);
+        return redirect()->route('product.index')
+                    ->with('success','Product updated successfully!');
+
     }
 
     /**

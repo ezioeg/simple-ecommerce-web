@@ -33,6 +33,15 @@
             <div class="flex-container">
                 <div class="form-container">
                     <h2 class="" style="text-align: center">Create product</h2>
+
+                    @if ($errors->any())
+                    <div class="header-container">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                    @endif
+
                     <form
                         action="{{ route('product.store') }}"
                         method="POST"
@@ -41,13 +50,20 @@
                         @csrf
 
                         <label for="pname">Name</label>
+                        <!-- @error('name')
+                        <label class="pname">{{ $message }}</label>
+                        @enderror -->
                         <input
                             type="text"
                             id="name"
                             name="name"
                             placeholder="Product name.."
                         />
+
                         <label for="pphoto">Photo</label>
+                        <!-- @error('photo')
+                        <label class="">{{ $message }}</label>
+                        @enderror -->
                         <input
                             type="file"
                             id="photo"
@@ -56,6 +72,9 @@
                         />
 
                         <label for="pprice">Price</label>
+                        <!-- @error('price')
+                        <label class="">{{ $message }}</label>
+                        @enderror -->
                         <input
                             type="text"
                             id="price"

@@ -33,6 +33,15 @@
             <div class="flex-container">
                 <div class="form-container">
                     <h2 class="" style="text-align: center">Edit product</h2>
+
+                    @if ($errors->any())
+                    <div class="header-container">
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                    @endif
+
                     <form
                         action="{{ url('update-product/'.$product->id) }}"
                         method="POST"
