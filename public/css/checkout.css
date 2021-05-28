@@ -103,3 +103,17 @@ span.price {
     position: absolute;
     right: 5px;
 }
+.back-button {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.tax-text {
+    text-align: center;
+    color: white;
+}

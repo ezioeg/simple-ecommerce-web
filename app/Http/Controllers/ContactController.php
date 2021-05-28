@@ -43,15 +43,23 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-          //defining array for data storage
-     $data = array();
-     $data['fullname'] = $request->fullname;
-     $data['email'] = $request->email;
-     $data['subject'] = $request->subject;
-    
-         $contact = DB::table('contacts')->insert($data);
-         return redirect()->route('contact.index')
-                     ->with('success','Your message was sent!');
+
+        // Field validation
+        $this->validate($request, [
+
+            'fullname' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+        ]); 
+
+        // Defining array for data storage
+        $data = array();
+        $data['fullname'] = $request->fullname;
+        $data['email'] = $request->email;
+        $data['subject'] = $request->subject;
+        
+        $contact = DB::table('contacts')->insert($data);
+        return redirect()->route('contact.index')->with('success','Your message was sent!');
     }
 
     /**

@@ -20,7 +20,7 @@ class CreateCheckoutsTable extends Migration
             $table->text('address');
             $table->string('city');
             $table->string('state');
-            $table->string('zip');
+            $table->string('postcode');
             $table->string('cardname');
             $table->string('cardnumber');
             $table->string('expmonth');

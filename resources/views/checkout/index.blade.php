@@ -62,7 +62,18 @@
                                     ><b>£{{ $total }}</b></span
                                 >
                             </p>
+
+                            @else
+                            <p style="color: white">
+                                There are no products to buy.
+                            </p>
                             @endif
+
+                            <a
+                                class="back-button"
+                                href="{{ route('menu.index') }}"
+                                >Back to menu</a
+                            >
                         </div>
                     </div>
                     <div class="col-75">
@@ -80,6 +91,11 @@
                                             Billing Address
                                         </h3>
                                         <label for="fullname">Full Name</label>
+                                        @error('fullname')
+                                        <label class=""
+                                            >(this field is required)</label
+                                        >
+                                        @enderror
                                         <input
                                             type="text"
                                             id="fullname"
@@ -87,6 +103,11 @@
                                             placeholder="John M. Doe"
                                         />
                                         <label for="email"> Email</label>
+                                        @error('email')
+                                        <label class=""
+                                            >(this field is required)</label
+                                        >
+                                        @enderror
                                         <input
                                             type="text"
                                             id="email"
@@ -94,6 +115,11 @@
                                             placeholder="john@example.com"
                                         />
                                         <label for="address"> Address</label>
+                                        @error('address')
+                                        <label class=""
+                                            >(this field is required)</label
+                                        >
+                                        @enderror
                                         <input
                                             type="text"
                                             id="address"
@@ -101,6 +127,11 @@
                                             placeholder="Abbey Road"
                                         />
                                         <label for="city"> City</label>
+                                        @error('city')
+                                        <label class=""
+                                            >(this field is required)</label
+                                        >
+                                        @enderror
                                         <input
                                             type="text"
                                             id="city"
@@ -111,6 +142,12 @@
                                         <div class="row">
                                             <div class="col-50">
                                                 <label for="state">State</label>
+                                                @error('state')
+                                                <label class=""
+                                                    >(this field is
+                                                    required)</label
+                                                >
+                                                @enderror
                                                 <input
                                                     type="text"
                                                     id="state"
@@ -119,11 +156,19 @@
                                                 />
                                             </div>
                                             <div class="col-50">
-                                                <label for="zip">Zip</label>
+                                                <label for="postcode"
+                                                    >Postcode</label
+                                                >
+                                                @error('postcode')
+                                                <label class=""
+                                                    >(this field is
+                                                    required)</label
+                                                >
+                                                @enderror
                                                 <input
                                                     type="text"
-                                                    id="zip"
-                                                    name="zip"
+                                                    id="postcode"
+                                                    name="postcode"
                                                     placeholder="NW8 0AE"
                                                 />
                                             </div>
@@ -156,6 +201,11 @@
                                         <label for="cardname"
                                             >Name on Card</label
                                         >
+                                        @error('cardname')
+                                        <label class=""
+                                            >(this field is required)</label
+                                        >
+                                        @enderror
                                         <input
                                             type="text"
                                             id="cardname"
@@ -165,6 +215,11 @@
                                         <label for="cardnumber"
                                             >Credit card number</label
                                         >
+                                        @error('cardnumber')
+                                        <label class=""
+                                            >(this field is required)</label
+                                        >
+                                        @enderror
                                         <input
                                             type="text"
                                             id="cardnumber"
@@ -172,6 +227,11 @@
                                             placeholder="1111-2222-3333-4444"
                                         />
                                         <label for="expmonth">Exp Month</label>
+                                        @error('expmonth')
+                                        <label class=""
+                                            >(this field is required)</label
+                                        >
+                                        @enderror
                                         <input
                                             type="text"
                                             id="expmonth"
@@ -183,6 +243,12 @@
                                                 <label for="expyear"
                                                     >Exp Year</label
                                                 >
+                                                @error('expyear')
+                                                <label class=""
+                                                    >(this field is
+                                                    required)</label
+                                                >
+                                                @enderror
                                                 <input
                                                     type="text"
                                                     id="expyear"
@@ -192,6 +258,12 @@
                                             </div>
                                             <div class="col-50">
                                                 <label for="cvv">CVV</label>
+                                                @error('cvv')
+                                                <label class=""
+                                                    >(this field is
+                                                    required)</label
+                                                >
+                                                @enderror
                                                 <input
                                                     type="text"
                                                     id="cvv"
@@ -213,9 +285,14 @@
 
                                 <input
                                     type="submit"
+                                    onclick="return confirm('Are you sure about making this purchase?')"
                                     value="Continue to checkout"
                                     class="btn"
                                 />
+
+                                <p class="tax-text">
+                                    all prices included a 20% tax fee
+                                </p>
                             </form>
                         </div>
                     </div>

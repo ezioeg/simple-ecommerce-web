@@ -61,6 +61,11 @@ Route::get('delete-product/{id}','App\Http\Controllers\ProductController@delete'
 // Customer menu
 Route::get('menu','App\Http\Controllers\MenuController@index')->name('menu.index');
 
+//Favourite
+Route::get('favourites','App\Http\Controllers\ProductController@favouriteIndex')->name('favourite.index');
+Route::get('add-favourite/{id}','App\Http\Controllers\ProductController@addToFavourite');
+Route::get('delete-favourite/{id}','App\Http\Controllers\ProductController@deleteFromFavourite');
+
 // Customer basket
 Route::get('basket','App\Http\Controllers\ProductController@basketIndex')->name('basket.index');
 Route::get('add-basket/{id}','App\Http\Controllers\ProductController@addToBasket');

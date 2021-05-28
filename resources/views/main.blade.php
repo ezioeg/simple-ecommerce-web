@@ -18,6 +18,9 @@
             <div class="header-container">
                 <a class="button" href="{{ url('/') }}">Home</a>
                 <a class="button" href="{{ route('menu.index') }}">Menu</a>
+                <a class="button" href="{{ route('favourite.index') }}"
+                    >Favourites</a
+                >
                 <a class="button" href="{{ route('basket.index') }}">Basket</a>
                 <a class="button" href="{{ route('checkout.index') }}"
                     >Checkout</a

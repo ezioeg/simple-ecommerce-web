@@ -4,7 +4,7 @@
         <link
             rel="stylesheet"
             type="text/css"
-            href="{{ url('/css/basket.css') }}"
+            href="{{ url('/css/favourite.css') }}"
         />
     </head>
 
@@ -13,7 +13,7 @@
             <img src="images/logo.png" class="logo" width="300" height="300" />
 
             <div class="header-container">
-                <a class="button" href="#">Basket</a>
+                <a class="button" href="#">Favourites</a>
 
                 @if (Route::has('login')) @auth
                 <a class="button register">Hello, {{Auth::user()->name}}</a>
@@ -30,8 +30,8 @@
 
             <!-- products list-->
             <div class="grid-container">
-                @if(session('basket')) @php $total = 0 @endphp
-                @foreach(session('basket') as $id => $product)
+                @if(session('favourite')) @foreach(session('favourite') as $id
+                => $product)
                 <div class="grid-item">
                     <div class="product-img">
                         <!--added limit size for image(max-width)-->
@@ -46,13 +46,18 @@
                         <p class="name-price">
                             {{ $product["name"] }} : £{{ $product["price"] }}
                         </p>
-                        <p class="name-price" style="text-align: center;">
-                            Quantity : {{ $product["quantity"] }}
-                        </p>
+
+                        <a href="{{ url('add-basket', [$id]) }}">
+                            <img
+                                class="img"
+                                style="max-width: 62px"
+                                src="images/basket.png"
+                                alt=""
+                        /></a>
 
                         <a
-                            href="{{ url('delete-basket', [$id]) }}"
-                            onclick="return confirm('Do you want to remove from the basket?')"
+                            href="{{ url('delete-favourite', [$id]) }}"
+                            onclick="return confirm('Do you want to remove from the favourite?')"
                         >
                             <img
                                 class="img"
@@ -62,33 +67,29 @@
                         /></a>
                     </div>
                 </div>
-                @php if(!$basket->isEmpty()){ $total += $product['price'] *
-                $product['quantity']; } @endphp @endforeach
+                @endforeach
             </div>
 
-            <p class="header-container">
-                <b class="button">TOTAL: £{{ $total }}</b>
-            </p>
             @endif
 
             <a class="button cancel-button" href="{{ route('menu.index') }}"
                 >Back to menu</a
             >
 
-            @if(session('basket'))
+            @if(session('favourite'))
             <a
                 class="button checkout-button"
-                href="{{ route('checkout.index') }}"
+                href="{{ route('basket.index') }}"
             >
-                Proceed to checkout
+                Go to basket
             </a>
             @else
-            <div class="message">There are no products in the basket</div>
+            <div class="message">There are no products in the favourite</div>
             <a
-                class="disabled button checkout-button"
-                href="{{ route('checkout.index') }}"
+                class="button checkout-button"
+                href="{{ route('basket.index') }}"
             >
-                Proceed to checkout
+                Go to basket
             </a>
 
             @endif

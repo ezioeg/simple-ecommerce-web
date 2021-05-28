@@ -15,6 +15,9 @@
             <div class="header-container">
                 <a class="button" href="{{ url('/') }}">Home</a>
                 <a class="button" href="{{ route('menu.index') }}">Menu</a>
+                <a class="button" href="{{ route('favourite.index') }}"
+                    >Favourites</a
+                >
                 <a class="button" href="{{ route('basket.index') }}">Basket</a>
                 <a class="button" href="{{ route('checkout.index') }}"
                     >Checkout</a
@@ -45,6 +48,9 @@
                     >
                         @csrf
                         <label for="fullname">Full name</label>
+                        @error('fullname')
+                        <label class="">(this field is required)</label>
+                        @enderror
                         <input
                             type="text"
                             id="fullname"
@@ -52,6 +58,9 @@
                             placeholder="Your name.."
                         />
                         <label for="email">Email</label>
+                        @error('email')
+                        <label class="">(this field is required)</label>
+                        @enderror
                         <input
                             type="text"
                             id="email"
@@ -60,6 +69,9 @@
                         />
 
                         <label for="subject">Subject</label>
+                        @error('subject')
+                        <label class="">(this field is required)</label>
+                        @enderror
                         <textarea
                             id="subject"
                             name="subject"
@@ -79,7 +91,7 @@
             <!-- Success message for every CRUD operation  -->
             @if($message = Session::get('success'))
             <div class="success-message">
-                <p>Message: {{ $message }}</p>
+                <p>{{ $message }}</p>
             </div>
             @endif
         </div>

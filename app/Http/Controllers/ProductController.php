@@ -68,9 +68,7 @@ class ProductController extends Controller
         }
 
         $product = DB::table('products')->insert($data);
-            return redirect()->route('product.index')
-                        ->with('success','Product created successfully!');
-       
+            return redirect()->route('product.index')->with('success','Product created successfully!');
     }
 
     /**
@@ -114,6 +112,7 @@ class ProductController extends Controller
  
         ]); 
 
+        // Defining array for data storage
         $data = array();
         $data['name'] = $request->name;
         $data['price'] = $request->price;
@@ -129,9 +128,7 @@ class ProductController extends Controller
         }
 
         $product = DB::table('products')->where('id',$id)->update($data);
-        return redirect()->route('product.index')
-                    ->with('success','Product updated successfully!');
-
+        return redirect()->route('product.index')->with('success','Product updated successfully!');
     }
 
     /**
@@ -144,8 +141,69 @@ class ProductController extends Controller
     {
         $data = DB::table('products')->where('id',$id)->first();
         $product = DB::table('products')->where('id',$id)->delete();
-        return redirect()->route('product.index')
-                        ->with('success','Product deleted successfully!');
+        return redirect()->route('product.index')->with('success','Product deleted successfully!');
+    }
+
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------Favourites section----------------------------------------------------------//
+//--------------------------------------------------------------------------------------------------------------------------------------------//
+
+    public function favouriteIndex()
+    {
+        //changed from table('favourites')
+        $favourite = DB::table('products')->get();
+        return view('favourite.index', compact('favourite'));
+    }
+
+
+    public function addToFavourite($id)
+    {
+        $product = Product::find($id);
+        $favourite = session()->get('favourite');
+
+        // if favourite is empty then this the first product
+        if(!$favourite) {
+            $favourite = [
+                    $id => [
+                        'name' => $product->name,
+                        'photo'=> $product->photo,
+                        'price' => $product->price,
+                        'quantity' => 1,
+                    ]
+            ];
+            session()->put('favourite', $favourite);
+            return redirect()->route('menu.index')->with('success','Added to favourite!');
+        }
+
+        // if favourite not empty then check if this product exist then increment quantity
+        if(isset($favourite[$id])) {
+            $favourite[$id]['quantity']++;
+            session()->put('favourite', $favourite);
+            return redirect()->route('menu.index')->with('success','Added to favourite!');
+        }
+
+        // if item not exist in favourite then add to cart with quantity = 1
+        $favourite[$id] = [
+            'name' => $product->name,
+            'photo'=> $product->photo,
+            'price' => $product->price,
+            'quantity' => 1,
+        ];
+
+        session()->put('favourite', $favourite);
+        return redirect()->route('menu.index')->with('success','Added to favourite!');
+        }
+
+    public function deleteFromFavourite($id){
+        $favourite = session()->get('favourite');
+
+        if(isset($favourite[$id]))
+        {
+            unset($favourite[$id]);
+            session()->put('favourite', $favourite);
+        }
+
+        return redirect()->route('favourite.index')->with('success','Removed from favourite!');
     }
 
 //--------------------------------------------------------------------------------------------------------------------------------------------//
@@ -160,48 +218,50 @@ class ProductController extends Controller
 
     public function addToBasket($id)
     {
-            $product = Product::find($id);
+        $product = Product::find($id);
+        $basket = session()->get('basket');
 
-            $basket = session()->get('basket');
-            // if basket is empty then this the first product
-            if(!$basket) {
-                $basket = [
-                        $id => [
-                            'name' => $product->name,
-                            'photo'=> $product->photo,
-                            'price' => $product->price,
-                            'quantity' => 1,
-                        ]
-                ];
-                session()->put('basket', $basket);
-                return redirect()->route('menu.index')->with('success','Added to basket!');
-            }
-            // if basket not empty then check if this product exist then increment quantity
-            if(isset($basket[$id])) {
-                $basket[$id]['quantity']++;
-                session()->put('basket', $basket);
-                return redirect()->route('menu.index')->with('success','Added to basket!');
-            }
-            // if item not exist in basket then add to basket with quantity = 1
-            $basket[$id] = [
-                'name' => $product->name,
-                'photo'=> $product->photo,
-                'price' => $product->price,
-                'quantity' => 1,
+        // if basket is empty then this the first product
+        if(!$basket) {
+            $basket = [
+                    $id => [
+                        'name' => $product->name,
+                        'photo'=> $product->photo,
+                        'price' => $product->price,
+                        'quantity' => 1,
+                    ]
             ];
-
             session()->put('basket', $basket);
             return redirect()->route('menu.index')->with('success','Added to basket!');
         }
 
-    public function deleteFromBasket($id){
-            $basket = session()->get('basket');
+        // if basket not empty then check if this product exist then increment quantity
+        if(isset($basket[$id])) {
+            $basket[$id]['quantity']++;
+            session()->put('basket', $basket);
+            return redirect()->route('menu.index')->with('success','Added to basket!');
+        }
 
-            if(isset($basket[$id]))
-            {
-                unset($basket[$id]);
-                session()->put('basket', $basket);
-            }
+        // if item not exist in basket then add to basket with quantity = 1
+        $basket[$id] = [
+            'name' => $product->name,
+            'photo'=> $product->photo,
+            'price' => $product->price,
+            'quantity' => 1,
+        ];
+
+        session()->put('basket', $basket);
+        return redirect()->route('menu.index')->with('success','Added to basket!');
+        }
+
+    public function deleteFromBasket($id){
+        $basket = session()->get('basket');
+
+        if(isset($basket[$id]))
+        {
+            unset($basket[$id]);
+            session()->put('basket', $basket);
+        }
 
         return redirect()->route('basket.index')->with('success','Removed from basket!');
     }
@@ -217,14 +277,32 @@ class ProductController extends Controller
     }
 
     public function checkoutStore(Request $request){
-        //defining array for data storage
+
+        // Field validation
+        $this->validate($request, [
+ 
+            'fullname' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'postcode' => 'required',
+            'cardname' => 'required',
+            'cardnumber' => 'required',
+            'expmonth' => 'required',
+            'expyear' => 'required',
+            'cvv' => 'required',
+            'total' => 'required',
+        ]); 
+
+        // Defining array for data storage
         $data = array();
         $data['fullname'] = $request->fullname;
         $data['email'] = $request->email;
         $data['address'] = $request->address;
         $data['city'] = $request->city;
         $data['state'] = $request->state;
-        $data['zip'] = $request->zip;
+        $data['postcode'] = $request->postcode;
         $data['cardname'] = $request->cardname;
         $data['cardnumber'] = $request->cardnumber;
         $data['expmonth'] = $request->expmonth;
