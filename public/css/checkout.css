@@ -113,6 +113,13 @@ span.price {
     padding-top: 10px;
 }
 
+.disabled {
+    cursor: not-allowed;
+    text-decoration: none;
+    pointer-events: none;
+    background-color: gray;
+}
+
 .tax-text {
     text-align: center;
     color: white;

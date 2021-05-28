@@ -283,12 +283,24 @@
                                     />
                                 </div>
 
+                                @if(session('basket'))
                                 <input
                                     type="submit"
                                     onclick="return confirm('Are you sure about making this purchase?')"
                                     value="Continue to checkout"
                                     class="btn"
                                 />
+
+                                @else
+
+                                <input
+                                    disabled
+                                    type="submit"
+                                    onclick="return confirm('Are you sure about making this purchase?')"
+                                    value="Continue to checkout"
+                                    class="disabled btn"
+                                />
+                                @endif
 
                                 <p class="tax-text">
                                     all prices included a 20% tax fee
