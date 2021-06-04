@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\ProductController;
-namespace App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,61 +24,40 @@ Route::get('/', function () {
     return view('main');
 });
 
-// Route::get('/menu', function () {
-//     return view('product.menu');
-// });
-// Route::get('/products', function () {
-//     return view('product.index');
-// });
-// Route::get('/create-product', function () {
-//     return view('product.create');
-// });
-// Route::get('/edit-product', function () {
-//     return view('product.edit');
-// });
-// Route::get('/basket', function () {
-//     return view('basket.index');
-// });
-// Route::get('/checkout', function () {
-//     return view('checkout.index');
-// });
-// Route::get('/contact-us', function () {
-//     return view('contact.index');
-// });
-
 // Auth
 Auth::routes();
 
-Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+Route::get('home',  [HomeController::class, 'index'])->name('home');
+Route::get('logout', [LoginController::class, 'logout']);
 
 // Admin product list
-Route::get('products','App\Http\Controllers\ProductController@index')->name('product.index');
+Route::get('products', [ProductController::class, 'index'])->name('product.index');
+// Route::get('products','ProductController@index')->name('product.index');
+
 // Admin crud of products
-Route::get('create-product','App\Http\Controllers\ProductController@create')->name('product.create');
-Route::post('store','App\Http\Controllers\ProductController@store')->name('product.store');
-Route::get('edit-product/{id}','App\Http\Controllers\ProductController@edit');
-Route::post('update-product/{id}','App\Http\Controllers\ProductController@update');
-Route::get('delete-product/{id}','App\Http\Controllers\ProductController@delete');
+Route::get('create-product', [ProductController::class, 'create'])->name('product.create'); 
+Route::post('store', [ProductController::class, 'store'])->name('product.store');  
+Route::get('edit-product/{id}',[ProductController::class, 'edit']);  
+Route::post('update-product/{id}',[ProductController::class, 'update']);  
+Route::get('delete-product/{id}',[ProductController::class, 'delete']);
 
 // Customer menu
-Route::get('menu','App\Http\Controllers\MenuController@index')->name('menu.index');
+Route::get('menu',[MenuController::class, 'index'])->name('menu.index');
 
 //Favourite
-Route::get('favourites','App\Http\Controllers\ProductController@favouriteIndex')->name('favourite.index');
-Route::get('add-favourite/{id}','App\Http\Controllers\ProductController@addToFavourite');
-Route::get('delete-favourite/{id}','App\Http\Controllers\ProductController@deleteFromFavourite');
+Route::get('favourites',[ProductController::class, 'favouriteIndex'])->name('favourite.index');
+Route::get('add-favourite/{id}',[ProductController::class, 'addToFavourite']);  
+Route::get('delete-favourite/{id}',[ProductController::class, 'deleteFromFavourite']);  
 
 // Customer basket
-Route::get('basket','App\Http\Controllers\ProductController@basketIndex')->name('basket.index');
-Route::get('add-basket/{id}','App\Http\Controllers\ProductController@addToBasket');
-Route::get('delete-basket/{id}','App\Http\Controllers\ProductController@deleteFromBasket');
+Route::get('basket', [ProductController::class, 'basketIndex'])->name('basket.index'); 
+Route::get('add-basket/{id}',[ProductController::class, 'addToBasket']);  
+Route::get('delete-basket/{id}',[ProductController::class, 'deleteFromBasket']);
 
 // Customer checkout
-Route::get('checkout','App\Http\Controllers\ProductController@checkoutIndex')->name('checkout.index');
-Route::post('checkout-store','App\Http\Controllers\ProductController@checkoutStore')->name('checkout.store');
+Route::get('checkout',[CheckoutController::class, 'index'])->name('checkout.index');  
+Route::post('checkout-store',[CheckoutController::class, 'store'])->name('checkout.store');
 
 // Customer contact
-Route::get('contact-us','App\Http\Controllers\ContactController@index')->name('contact.index');
-Route::post('contact-store','App\Http\Controllers\ContactController@store')->name('contact.store');
+Route::get('contact-us',[ContactController::class, 'index'])->name('contact.index');
+Route::post('contact-store',[ContactController::class, 'store'])->name('contact.store'); 

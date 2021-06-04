@@ -1,46 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Validator; 
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-
 //--------------------------------------------------------------------------------------------------------------------------------------------//
 //----------------------------------------------------------------Product section-------------------------------------------------------------//
 //--------------------------------------------------------------------------------------------------------------------------------------------//
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $product = DB::table('products')->get();
         return view('product.index', compact('product'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('product.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
          // Field validation
@@ -71,36 +52,12 @@ class ProductController extends Controller
             return redirect()->route('product.index')->with('success','Product created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $product= DB::table('products')->where('id',$id)->first();
         return view('product.edit',compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
 
@@ -131,12 +88,6 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with('success','Product updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function delete($id)
     {
         $data = DB::table('products')->where('id',$id)->first();
@@ -266,53 +217,5 @@ class ProductController extends Controller
         return redirect()->route('basket.index')->with('success','Removed from basket!');
     }
 
-//--------------------------------------------------------------------------------------------------------------------------------------------//
-//----------------------------------------------------------------Checkout section------------------------------------------------------------//
-//--------------------------------------------------------------------------------------------------------------------------------------------//
-
-    public function checkoutIndex()
-    {
-        $basket = DB::table('products')->get();
-        return view('checkout.index', compact('basket'));
-    }
-
-    public function checkoutStore(Request $request){
-
-        // Field validation
-        $this->validate($request, [
- 
-            'fullname' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'postcode' => 'required',
-            'cardname' => 'required',
-            'cardnumber' => 'required',
-            'expmonth' => 'required',
-            'expyear' => 'required',
-            'cvv' => 'required',
-            'total' => 'required',
-        ]); 
-
-        // Defining array for data storage
-        $data = array();
-        $data['fullname'] = $request->fullname;
-        $data['email'] = $request->email;
-        $data['address'] = $request->address;
-        $data['city'] = $request->city;
-        $data['state'] = $request->state;
-        $data['postcode'] = $request->postcode;
-        $data['cardname'] = $request->cardname;
-        $data['cardnumber'] = $request->cardnumber;
-        $data['expmonth'] = $request->expmonth;
-        $data['expyear'] = $request->expyear;
-        $data['cvv'] = $request->cvv;
-        $data['total'] = $request->total;
-
-        $request->session()->forget('basket');
-        $checkout = DB::table('checkouts')->insert($data);
-        return redirect()->route('menu.index')->with('success','Order placed successfully!');
-    }
 
 }

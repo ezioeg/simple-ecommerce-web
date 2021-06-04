@@ -57,15 +57,19 @@
 
             <div class="slideshow-container">
                 <div class="mySlides">
-                    <img src="images/27.svg" width="1000" height="500" />
+                    <img src="images/photo1.jpeg" width="1000" height="500" />
                 </div>
 
                 <div class="mySlides">
-                    <img src="images/32.svg" width="1000" height="500" />
+                    <img src="images/photo2.jpeg" width="1000" height="500" />
                 </div>
 
                 <div class="mySlides">
-                    <img src="images/43.svg" width="1000" height="500" />
+                    <img src="images/photo3.jpeg" width="1000" height="500" />
+                </div>
+
+                <div class="mySlides">
+                    <img src="images/photo4.jpeg" width="1000" height="500" />
                 </div>
 
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
