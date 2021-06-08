@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $table = 'products';
+
     protected $filllable = [
         'name',
         'photo',
         'price',
     ];
+
+    public $timestamps = false;
 }

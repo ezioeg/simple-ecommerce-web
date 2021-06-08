@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
-use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
@@ -13,8 +12,8 @@ class ContactController extends Controller
 
     public function index()
     {
-        $contact = DB::table('contacts')->get();
-        return view('contact.index', compact('contact'));
+        // $contact = Contact::all();
+        return view('contact.index');
     }
 
     public function store(Request $request)
@@ -28,13 +27,13 @@ class ContactController extends Controller
             'subject' => 'required',
         ]); 
 
-        // Defining array for data storage
-        $data = array();
-        $data['fullname'] = $request->fullname;
-        $data['email'] = $request->email;
-        $data['subject'] = $request->subject;
-        
-        $contact = DB::table('contacts')->insert($data);
+         // Creating contact
+         $contacts = new Contact();
+         $contacts->fullname = $request->fullname;
+         $contacts->email = $request->email;
+         $contacts->subject = $request->subject;
+
+         $contacts->save();
         return redirect()->route('contact.index')->with('success','Your message was sent!');
     }
 

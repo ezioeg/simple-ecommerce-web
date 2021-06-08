@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\VSE;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {

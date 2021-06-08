@@ -37,8 +37,7 @@
 
             <!-- products list-->
             <div class="grid-container">
-                {{-- {{$products}} --}} @if(count($product)>0) @foreach($product
-                as $pro)
+                @if(count($menu)>0) @foreach($menu as $pro)
 
                 <div class="grid-item">
                     <!--added limit size for image(max-width)-->

@@ -41,7 +41,7 @@
                         <th>Action</th>
                     </tr>
 
-                    @foreach($product as $pro)
+                    @foreach($products as $pro)
                     <tr>
                         <td>{{ $pro->name }}</td>
                         <td>
@@ -51,7 +51,7 @@
                                 width="80px"
                             />
                         </td>
-                        <td>${{ $pro->price }}</td>
+                        <td>£{{ $pro->price }}</td>
                         <td>
                             <a href="{{ URL::to('edit-product/'.$pro->id) }}"
                                 >Edit</a

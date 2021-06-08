@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Menu;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class MenuController extends Controller
 {
@@ -13,8 +12,8 @@ class MenuController extends Controller
 
     public function index()
     {
-        $product = DB::table('products')->get();
-        return view('product.menu', compact('product'));
+        $menu = Product::all();
+        return view('product.menu', compact('menu'));
     }
 
 }

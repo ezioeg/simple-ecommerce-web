@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -13,8 +12,9 @@ class ProductController extends Controller
 
     public function index()
     {
-        $product = DB::table('products')->get();
-        return view('product.index', compact('product'));
+        
+        $products = Product::all();
+        return view('product.index', compact('products'));
     }
 
     public function create()
@@ -33,11 +33,12 @@ class ProductController extends Controller
  
         ]); 
 
-        // Defining array for data storage
-        $data = array();
-        $data['name'] = $request->name;
-        $data['price'] = $request->price;
+        // Creating product
+        $products = new Product();
+        $products->name = $request->name;
+        $products->price = $request->price;
         $photo = $request->file('photo'); 
+      
         if($photo) {
             $photo_name = date('dmy_H_s_i');
             $ext = strtolower($photo->getClientOriginalExtension());
@@ -45,16 +46,16 @@ class ProductController extends Controller
             $upload_path = 'public/media/';
             $photo_url = $upload_path.$photo_full_name;
             $success = $photo->move($upload_path,$photo_full_name);
-            $data['photo'] = $photo_url;
+            $products->photo = $photo_url;
         }
 
-        $product = DB::table('products')->insert($data);
+        $products->save();
             return redirect()->route('product.index')->with('success','Product created successfully!');
     }
 
     public function edit($id)
     {
-        $product= DB::table('products')->where('id',$id)->first();
+        $product = Product::find($id);
         return view('product.edit',compact('product'));
     }
 
@@ -69,11 +70,12 @@ class ProductController extends Controller
  
         ]); 
 
-        // Defining array for data storage
-        $data = array();
-        $data['name'] = $request->name;
-        $data['price'] = $request->price;
-        $photo = $request->file('photo');
+         // Updating product
+         $product = Product::find($id);
+         $product->name = $request->name;
+         $product->price = $request->price;
+         $photo = $request->file('photo'); 
+
         if($photo) {
             $photo_name = date('dmy_H_s_i');
             $ext = strtolower($photo->getClientOriginalExtension());
@@ -81,17 +83,17 @@ class ProductController extends Controller
             $upload_path = 'public/media/';
             $photo_url = $upload_path.$photo_full_name;
             $success = $photo->move($upload_path,$photo_full_name);
-            $data['photo'] = $photo_url;
+            $product->photo = $photo_url;
         }
 
-        $product = DB::table('products')->where('id',$id)->update($data);
+        $product->save();
         return redirect()->route('product.index')->with('success','Product updated successfully!');
     }
 
     public function delete($id)
     {
-        $data = DB::table('products')->where('id',$id)->first();
-        $product = DB::table('products')->where('id',$id)->delete();
+        $product = Product::find($id);
+        $product ->delete();
         return redirect()->route('product.index')->with('success','Product deleted successfully!');
     }
 
@@ -101,11 +103,9 @@ class ProductController extends Controller
 
     public function favouriteIndex()
     {
-        //changed from table('favourites')
-        $favourite = DB::table('products')->get();
+        $favourite =  Product::all();
         return view('favourite.index', compact('favourite'));
     }
-
 
     public function addToFavourite($id)
     {
@@ -163,7 +163,7 @@ class ProductController extends Controller
 
     public function basketIndex()
     {
-        $basket = DB::table('products')->get();
+        $basket =  Product::all();
         return view('basket.index', compact('basket'));
     }
 

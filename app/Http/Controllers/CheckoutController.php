@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Models\Checkout;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use App\Models\Checkout;
 
 class CheckoutController extends Controller
 {
@@ -14,7 +14,7 @@ class CheckoutController extends Controller
 
     public function index()
     {
-        $basket = DB::table('products')->get();
+        $basket = Product::all();
         return view('checkout.index', compact('basket'));
     }
 
@@ -37,23 +37,23 @@ class CheckoutController extends Controller
             'total' => 'required',
         ]); 
 
-        // Defining array for data storage
-        $data = array();
-        $data['fullname'] = $request->fullname;
-        $data['email'] = $request->email;
-        $data['address'] = $request->address;
-        $data['city'] = $request->city;
-        $data['state'] = $request->state;
-        $data['postcode'] = $request->postcode;
-        $data['cardname'] = $request->cardname;
-        $data['cardnumber'] = $request->cardnumber;
-        $data['expmonth'] = $request->expmonth;
-        $data['expyear'] = $request->expyear;
-        $data['cvv'] = $request->cvv;
-        $data['total'] = $request->total;
-
+          // Creating checkout
+          $checkouts = new Checkout();
+          $checkouts->fullname = $request->fullname;
+          $checkouts->email = $request->email;
+          $checkouts->address = $request->address;
+          $checkouts->city = $request->city;
+          $checkouts->state = $request->state;
+          $checkouts->postcode = $request->postcode;
+          $checkouts->cardname = $request->cardname;
+          $checkouts->cardnumber = $request->cardnumber;
+          $checkouts->expmonth = $request->expmonth;
+          $checkouts->expyear = $request->expyear;
+          $checkouts->cvv = $request->cvv;
+          $checkouts->total = $request->total;
+ 
         $request->session()->forget('basket');
-        $checkout = DB::table('checkouts')->insert($data);
+        $checkouts->save();
         return redirect()->route('menu.index')->with('success','Thanks for your purchase!');
     }
 

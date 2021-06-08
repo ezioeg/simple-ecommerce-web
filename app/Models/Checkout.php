@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Checkout extends Model
 {
-    use HasFactory;
+    protected $table = 'checkouts';
+
+    protected $filllable = [
+        'fullname',
+        'email',
+        'address',
+        'city',
+        'state',
+        'postcode',
+        'cardname',
+        'cardnumber',
+        'expmonth',
+        'expyear',
+        'cvv',
+        'total',
+    ];
 }
