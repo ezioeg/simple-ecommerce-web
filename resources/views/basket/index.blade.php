@@ -38,7 +38,7 @@
                         <img
                             class="img"
                             style="max-width: 150px"
-                            src="{{ $product['photo'] }}"
+                            src="{{  asset('storage').'/'.$product['photo'] }}"
                             alt=""
                         />
                     </div>

@@ -58,6 +58,7 @@
                             id="name"
                             name="name"
                             placeholder="Product name.."
+                            value="{{ old('name') }}"
                         />
 
                         <label for="pphoto">Photo</label>
@@ -80,6 +81,7 @@
                             id="price"
                             name="price"
                             placeholder="Product price.."
+                            value="{{ old('price') }}"
                         />
 
                         <input type="submit" value="Create" />

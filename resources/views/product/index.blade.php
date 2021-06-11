@@ -46,7 +46,7 @@
                         <td>{{ $pro->name }}</td>
                         <td>
                             <img
-                                src="{{ URL::to($pro->photo) }}"
+                                src="{{ asset('storage').'/'.$pro->photo }}"
                                 height="70px"
                                 width="80px"
                             />

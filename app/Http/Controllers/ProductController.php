@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -24,29 +25,24 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-         // Field validation
-         $this->validate($request, [
- 
+
+        $fields = [
             'name' => 'required',
             'price' => 'required',
             'photo' => 'required'
- 
-        ]); 
+        ];
+        
+         // Field validation
+         $this->validate($request, $fields); 
 
         // Creating product
         $products = new Product();
         $products->name = $request->name;
         $products->price = $request->price;
-        $photo = $request->file('photo'); 
-      
-        if($photo) {
-            $photo_name = date('dmy_H_s_i');
-            $ext = strtolower($photo->getClientOriginalExtension());
-            $photo_full_name = $photo_name.'.'.$ext;
-            $upload_path = 'public/media/';
-            $photo_url = $upload_path.$photo_full_name;
-            $success = $photo->move($upload_path,$photo_full_name);
-            $products->photo = $photo_url;
+
+        if($request->hasFile('photo')) {
+            // Save url and store photo
+            $products->photo = $request->file('photo')->store("uploads", 'public');
         }
 
         $products->save();
@@ -55,45 +51,48 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         return view('product.edit',compact('product'));
     }
 
     public function update(Request $request, $id)
     {
 
-        // Field validation
-        $this->validate($request, [
- 
+        $fields = [
             'name' => 'required',
-            'price' => 'required'
- 
-        ]); 
+            'price' => 'required',
+        ];
+
+        // Field validation
+        $this->validate($request, $fields); 
 
          // Updating product
-         $product = Product::find($id);
+         $product = Product::findOrFail($id);
          $product->name = $request->name;
          $product->price = $request->price;
-         $photo = $request->file('photo'); 
 
-        if($photo) {
-            $photo_name = date('dmy_H_s_i');
-            $ext = strtolower($photo->getClientOriginalExtension());
-            $photo_full_name = $photo_name.'.'.$ext;
-            $upload_path = 'public/media/';
-            $photo_url = $upload_path.$photo_full_name;
-            $success = $photo->move($upload_path,$photo_full_name);
-            $product->photo = $photo_url;
+         if($request->hasFile('photo')) {
+
+            // Delete previous stored photo
+            Storage::delete('public/'.$product->photo);
+            // Save new URL and store new photo
+            $product->photo = $request->file('photo')->store("uploads", 'public');
         }
 
-        $product->save();
+        $product->update();
         return redirect()->route('product.index')->with('success','Product updated successfully!');
     }
 
     public function delete($id)
     {
-        $product = Product::find($id);
-        $product ->delete();
+
+        $product = Product::findOrFail($id);
+
+        // Delete the product and stored photo
+        if( Storage::delete('public/'.$product->photo)) {
+            Product::destroy($id);
+        }
+
         return redirect()->route('product.index')->with('success','Product deleted successfully!');
     }
 

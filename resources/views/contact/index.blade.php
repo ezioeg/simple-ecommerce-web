@@ -56,6 +56,7 @@
                             id="fullname"
                             name="fullname"
                             placeholder="Your name.."
+                            value="{{ old('fullname') }}"
                         />
                         <label for="email">Email</label>
                         @error('email')
@@ -66,6 +67,7 @@
                             id="email"
                             name="email"
                             placeholder="Your email.."
+                            value="{{ old('email') }}"
                         />
 
                         <label for="subject">Subject</label>
@@ -77,6 +79,7 @@
                             name="subject"
                             placeholder="Write something.."
                             style="height: 100px"
+                            value="{{ old('subject') }}"
                         ></textarea>
 
                         <input type="submit" value="Submit" />

@@ -57,7 +57,7 @@
                         />
                         <label for="pphoto">Photo</label>
                         <img
-                            src="{{ URL::to($product->photo) }}"
+                            src="{{ asset('storage').'/'.$product->photo }}"
                             height="70px"
                             width="80px"
                         />

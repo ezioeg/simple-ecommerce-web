@@ -101,6 +101,7 @@
                                             id="fullname"
                                             name="fullname"
                                             placeholder="John M. Doe"
+                                            value="{{ old('fullname') }}"
                                         />
                                         <label for="email"> Email</label>
                                         @error('email')
@@ -113,6 +114,7 @@
                                             id="email"
                                             name="email"
                                             placeholder="john@example.com"
+                                            value="{{ old('email') }}"
                                         />
                                         <label for="address"> Address</label>
                                         @error('address')
@@ -125,6 +127,7 @@
                                             id="address"
                                             name="address"
                                             placeholder="Abbey Road"
+                                            value="{{ old('address') }}"
                                         />
                                         <label for="city"> City</label>
                                         @error('city')
@@ -137,6 +140,7 @@
                                             id="city"
                                             name="city"
                                             placeholder="London"
+                                            value="{{ old('city') }}"
                                         />
 
                                         <div class="row">
@@ -153,6 +157,7 @@
                                                     id="state"
                                                     name="state"
                                                     placeholder="LDN"
+                                                    value="{{ old('state') }}"
                                                 />
                                             </div>
                                             <div class="col-50">
@@ -170,6 +175,9 @@
                                                     id="postcode"
                                                     name="postcode"
                                                     placeholder="NW8 0AE"
+                                                    value="{{
+                                                        old('postcode')
+                                                    }}"
                                                 />
                                             </div>
                                         </div>
@@ -211,6 +219,7 @@
                                             id="cardname"
                                             name="cardname"
                                             placeholder="John More Doe"
+                                            value="{{ old('cardname') }}"
                                         />
                                         <label for="cardnumber"
                                             >Credit card number</label
@@ -225,6 +234,7 @@
                                             id="cardnumber"
                                             name="cardnumber"
                                             placeholder="1111-2222-3333-4444"
+                                            value="{{ old('cardnumber') }}"
                                         />
                                         <label for="expmonth">Exp Month</label>
                                         @error('expmonth')
@@ -237,6 +247,7 @@
                                             id="expmonth"
                                             name="expmonth"
                                             placeholder="September"
+                                            value="{{ old('expmonth') }}"
                                         />
                                         <div class="row">
                                             <div class="col-50">
@@ -254,6 +265,7 @@
                                                     id="expyear"
                                                     name="expyear"
                                                     placeholder="2018"
+                                                    value="{{ old('expyear') }}"
                                                 />
                                             </div>
                                             <div class="col-50">
@@ -269,6 +281,7 @@
                                                     id="cvv"
                                                     name="cvv"
                                                     placeholder="352"
+                                                    value="{{ old('cvv') }}"
                                                 />
                                             </div>
                                         </div>

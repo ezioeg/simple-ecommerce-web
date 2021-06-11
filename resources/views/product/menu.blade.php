@@ -44,9 +44,9 @@
                     @php $photo=explode(',',$pro->photo); @endphp
                     <img
                         class="img"
-                        style="max-width: 250px"
-                        src="{{ $photo[0] }}"
-                        alt="{{ $photo[0] }}"
+                        style="max-width: 200px"
+                        src="{{ asset('storage').'/'.$pro->photo }}"
+                        alt="{{ asset('storage').'/'.$pro->photo }}"
                     />
                     <p class="name-price">
                         {{ $pro->name }}: £{{ $pro->price }}
