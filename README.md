@@ -35,8 +35,7 @@ Simple Ecommerce Web es una aplicación web de comercio electrónico que ofrece 
 
 4. Configura el archivo de entorno:
 
-* Renombra .env.example a .env y configura las credenciales de tu base de datos.
-
+    * Renombra .env.example a .env y configura las credenciales de tu base de datos.
 
 5. Genera la clave de la aplicación:
 
