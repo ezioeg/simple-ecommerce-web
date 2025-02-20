@@ -1,64 +1,65 @@
 # Simple Ecommerce Web
 
-Simple Ecommerce Web es una aplicación web de comercio electrónico que ofrece las funciones básicas para la gestión de productos y compras. La aplicación incluye un panel de administración para gestionar productos, registrar usuarios y simular compras.
+Simple Ecommerce Web is an e-commerce web application that offers basic functions for product and purchase management. The application includes an administration panel to manage products, register users, and simulate purchases.
 
-## Características
+## Features
 
-- **Gestión de productos**: Crea, edita y elimina información de productos.
-- **Registro de usuarios**: Permite a los usuarios registrarse y gestionar su cuenta.
-- **Carrito de compra**: Añade productos al carrito y gestiona el proceso de compra.
-- **Simulación de compra**: Realiza una simulación de la compra de productos.
-- **Interfaz sencilla**: Diseño limpio y funcional sin utilizar frameworks de CSS
+- **Product management**: Create, edit, and delete product information.
+- **User registration**: Allows users to register and manage their accounts.
+- **Shopping cart**: Add products to the cart and manage the purchase process.
+- **Purchase simulation**: Simulate the purchase of products.
+- **Simple interface**: Clean and functional design without using CSS frameworks.
 
-## Tecnologías Usadas
+## Technologies Used
 
 - **PHP**
 - **Laravel**
-- **CSS3 puro**: Estilos implementados sin utilizar frameworks o librerías de CSS.
+- **Pure CSS3**: Styles implemented without using CSS frameworks or libraries.
 
-## Instalación
+## Setup
 
-1. Clona el repositorio:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/tu-usuario/simple-ecommerce-web.git
 
-2. Navega al directorio del proyecto:
+
+2. Navigate to the project directory:
 
    ```bash
    cd simple-ecommerce-web
 
-3. Instala las dependencias de Laravel:
+3. Install Laravel dependencies:
 
    ```bash
    composer install
 
-4. Configura el archivo de entorno:
+4. Configure the environment file:
 
-    * Renombra .env.example a .env y configura las credenciales de tu base de datos.
+    * Rename .env.example to .env and set up your database credentials.
 
-5. Genera la clave de la aplicación:
+5. Generate the application key:
 
    ```bash
    php artisan key:generate
 
-6. Ejecuta las migraciones para crear las tablas en la base de datos:
+6. Run the migrations to create the database tables:
 
    ```bash
    php artisan migrate
    
-## Uso
-Para iniciar la aplicación, ejecuta el servidor de desarrollo de Laravel:
+## Run
+To start the application, run Laravel’s development server:
 
    ```bash
    php artisan serve
    ```
-Esto abrirá la aplicación en tu navegador por defecto en http://localhost:8000.
+This will open the application in your default browser at http://localhost:8000.
 
-## Contribuciones
+## Contributions
 
-Las contribuciones son bienvenidas. Si deseas mejorar el proyecto, por favor crea un fork y envía un pull request.
+Contributions are welcome. If you want to improve the project, please create a fork and submit a pull request.
 
-## Contacto
+## Contact
 
-Para preguntas o sugerencias, puedes contactarme a través de [ezioeg@gmail.com].
+For questions or suggestions, you can contact me at [ezioeg@gmail.com].
