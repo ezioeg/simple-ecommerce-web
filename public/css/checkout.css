@@ -1,0 +1,126 @@
+body {
+    background-image: url("../images/bg.jpeg");
+}
+
+/* ----- HEADER ----- */
+.logo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.header-container {
+    flex-grow: 1;
+    text-align: center;
+}
+.button {
+    background-color: black;
+    border: 1px;
+    color: white;
+    padding: 32px 64px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 43px;
+    cursor: pointer;
+}
+
+/* ----- CHECKOUT FORM ----- */
+* {
+    box-sizing: border-box;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+.col-25 {
+    flex: 25%;
+}
+.col-50 {
+    flex: 50%;
+}
+.col-75 {
+    flex: 75%;
+}
+.col-25,
+.col-50,
+.col-75 {
+    padding: 0 16px;
+}
+.flex-container {
+    display: flex;
+    justify-content: center;
+    padding: 50px 200px;
+}
+.checkout-container {
+    background-color: black;
+    padding: 20px;
+}
+input[type="text"] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+}
+label {
+    margin-bottom: 10px;
+    display: block;
+    color: white;
+}
+.icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+}
+.btn {
+    background-color: white;
+    color: black;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-size: 17px;
+}
+hr {
+    border: 1px solid white;
+}
+span.price {
+    float: right;
+    color: white;
+}
+.col-25 {
+    margin-bottom: 20px;
+}
+
+/* ----- BUTTONS ----- */
+.register {
+    position: absolute;
+    right: 190px;
+}
+.login {
+    position: absolute;
+    right: 5px;
+}
+.back-button {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding-top: 10px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    text-decoration: none;
+    pointer-events: none;
+    background-color: gray;
+}
+
+.tax-text {
+    text-align: center;
+    color: white;
+}

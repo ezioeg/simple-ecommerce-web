@@ -1,0 +1,127 @@
+body {
+    background-image: url("../images/bg.jpeg");
+}
+
+/* ----- HEADER ----- */
+.logo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.header-container {
+    flex-grow: 1;
+    text-align: center;
+}
+.button {
+    background-color: black;
+    border: 1px;
+    color: white;
+    padding: 32px 64px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.title {
+    text-align: center;
+    font-size: 80px;
+}
+
+/* ----- ICONS ----- */
+.fa {
+    padding: 10px;
+    font-size: 20px;
+    width: 20px;
+    text-align: center;
+    text-decoration: none;
+    margin: 15px 8px;
+    border-radius: 50%;
+}
+.fa-facebook {
+    background: white;
+    color: black;
+}
+.fa-twitter {
+    background: white;
+    color: black;
+}
+.fa-youtube {
+    background: white;
+    color: black;
+}
+.fa-instagram {
+    background: white;
+    color: black;
+}
+/* Lines */
+span {
+    position: relative;
+    font-size: 20px;
+    z-index: 1;
+    overflow: hidden;
+    /* text-align: center; */
+}
+span:before,
+span:after {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 50%;
+    height: 3px;
+    content: "\a0";
+    background-color: white;
+}
+span:before {
+    margin-left: -50%;
+    /* text-align: right; */
+}
+
+/* ----- SLIDERSHOW ----- */
+.mySlides {
+    display: none;
+}
+img {
+    vertical-align: middle;
+}
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    margin-top: 30px;
+}
+/* Next & previous buttons */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* ----- BUTTONS ----- */
+.contact-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+.register {
+    position: absolute;
+    right: 190px;
+}
+.login {
+    position: absolute;
+    right: 5px;
+}
