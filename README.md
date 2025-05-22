@@ -9,9 +9,12 @@ Simple Ecommerce Web is an e-commerce web application that offers basic function
 - **Simple interface**: Clean and functional design without using CSS frameworks.
 
 ## Technologies Used
-- PHP v7.3 / v8.0
-- Laravel v8.12
-- CSS3: Styles implemented without using CSS frameworks or libraries.
+### Core
+- [PHP](https://www.php.net/) `v7.3 / v8.0`  
+- [Laravel](https://laravel.com/docs/8.x) `v8.12`  
+
+### Styling
+- **CSS3**: Styles implemented without the use of external frameworks or libraries.
 
 ## Setup
 1. Install Laravel dependencies:
