@@ -1,12 +1,12 @@
-# Simple Ecommerce Web
-Simple Ecommerce Web is an e-commerce web application that offers basic functions for product and purchase management. The application includes an administration panel to manage products, register users, and simulate purchases.
+## 🛒 Simple Ecommerce Web  
+E-commerce web application providing basic functionality for managing products and purchases. Includes an administration panel for product management, user registration, and purchase simulation.
 
-## Features
-- **Product management**: Create, edit, and delete product information.
-- **User registration**: Allows users to register and manage their accounts.
-- **Shopping cart**: Add products to the cart and manage the purchase process.
-- **Purchase simulation**: Simulate the purchase of products.
-- **Simple interface**: Clean and functional design without using CSS frameworks.
+### Features  
+- **Product Management**: Create, edit, and delete products.  
+- **User Registration**: Allows users to register and manage their accounts.  
+- **Shopping Cart**: Add products to the cart and manage the purchase flow.  
+- **Purchase Simulation**: Simulates product purchases.  
+- **Simple Interface**: Clean and functional design without the use of CSS frameworks.
 
 ## Technologies Used
 ### Core
